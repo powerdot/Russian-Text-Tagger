@@ -1,1 +1,1 @@
-window.TextAnalyzer = require("../index");
+window.RussianTextTagger = require("../index");

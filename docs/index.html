@@ -3,8 +3,8 @@
 <script>
     Az.Morph.init('./dicts', function(){
         console.log('az loaded')
-        let ta = TextAnalyzer({triggers: [], loadedAz: Az});
-        let result = ta("как у тебя дела, друг?");
-        console.log('ta', result);
+        let rtt = RussianTextTagger({triggers: [], loadedAz: Az});
+        let result = rtt("как у тебя дела, друг?");
+        console.log('result:', result);
     })
 </script>

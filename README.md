@@ -2,7 +2,16 @@
 
 
 
-#### Generate docs
-```bash
-parcel build ./browser/index.js --dist-dir ./browser/build/ ; cp -rf ./browser/build/ ./docs/RTT/ ; cp ./node_modules/az/dist/az.min.js ./docs/az.min.js ; cp -rf ./node_modules/az/dicts ./docs/dicts
+## Usage example
+```
+<script src="./az.min.js"></script>
+<script src="./RTT/index.js"></script>
+<script>
+    Az.Morph.init('./dicts', function(){
+        console.log('az loaded')
+        let ta = RussianTextTagger({triggers: [], loadedAz: Az});
+        let result = ta("как у тебя дела, друг?");
+        console.log('ta', result);
+    })
+</script>
 ```
