@@ -8,9 +8,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "(npm run build-browser)",
-    "build-browser": "parcel build ./index.js --out-dir ./browser/build",
-    "apply-browser-build-to-docs": "cp -rf ./browser/build/ ./docs/TA/"
+    "build": "echo \"See docs/README.md\""
   },
   "author": "",
   "license": "ISC",
