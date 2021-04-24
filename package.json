@@ -1,7 +1,7 @@
 {
-  "name": "comment-toxifier",
+  "name": "russian-text-tagger",
   "version": "1.0.0",
-  "description": "",
+  "description": "Tag Russian text with triggers and determine it.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -12,28 +12,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@tensorflow-models/toxicity": "^1.2.2",
-    "@tensorflow-models/universal-sentence-encoder": "^1.3.2",
-    "@tensorflow/tfjs": "^1.7.4",
-    "@tensorflow/tfjs-node": "^3.4.0",
     "az": "^0.2.3",
-    "brain.js": "^2.0.0-beta.2",
     "core-js": "^3.11.0",
-    "mystem3": "^1.2.1",
-    "node-nlp": "^4.22.1",
-    "parcel": "^1.11.0",
-    "tomita-parser": "0.0.3"
+    "parcel": "^1.11.0"
   },
-  "devDependencies": {
-    "tinyify": "^3.0.0",
-    "gulp": "^3.9.1",
-    "gulp-concat": "^2.6.0",
-    "gulp-filesize": "0.0.6",
-    "gulp-jsdoc-to-markdown": "^1.2.2",
-    "gulp-rename": "^1.2.2",
-    "gulp-sourcemaps": "^2.0.0-alpha",
-    "gulp-uglify": "^1.5.3",
-    "gulp-util": "^3.0.7",
-    "merge-stream": "^1.0.0"
-  }
+  "devDependencies": {}
 }
