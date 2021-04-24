@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Tag Russian text with triggers and determine it.",
   "main": "index.js",
+  "targets": {
+    "main": false
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "(npm run build-browser)",
