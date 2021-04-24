@@ -1,0 +1,10 @@
+<script src="./az.min.js"></script>
+<script src="./TA/index.js"></script>
+<script>
+    Az.Morph.init('./TA/dicts', function(){
+        console.log('az loaded')
+        let ta = TextAnalyzer({triggers: [], loadedAz: Az});
+        let result = ta("как у тебя дела, друг?");
+        console.log('ta', result);
+    })
+</script>

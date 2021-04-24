@@ -1,0 +1,1 @@
+window.TextAnalyzer = require("../index");
