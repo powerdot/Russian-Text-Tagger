@@ -1,6 +1,6 @@
 let Az = require('az');
 const swear = require("./dicts/swear")(true);
-const drags = require("./dicts/drags")();
+const drugs = require("./dicts/drugs")();
 const gods = require("./dicts/gods")();
 const racism = require("./dicts/racism")();
 
@@ -28,7 +28,7 @@ function Analysis(sentence){
     // Разделение текста на предложения
     let sentences = sentence.replace(/\.\.(\.*)/g, '.').replace(/([.?!\n])\s*(?=[\D])/g, "$1|").split("|");
     let sentences_tokens = [];
-    for(let s of sentences) sentences_tokens.push( new Az.Tokens(s).done().filter(x=>x.type=="WORD") );
+    for(let s of sentences) sentences_tokens.push( new Az.Tokens(s).done() );
     
     // Генерация морфем и их свойств по словам в предложениях
     let marker_collection = [];
@@ -37,25 +37,34 @@ function Analysis(sentence){
     for(let sentence_tokens of sentences_tokens){
         let sentence_morphs = [];
         for(let token of sentence_tokens){
+            if(token.type != "WORD") {
+                sentence_morphs.push(token);
+                continue;
+            }
             let morph = Az.Morph(token.toString());
             let morph_POST = "undf";
             if(morph.length != 0) morph_POST = morph[0].tag.POST;
             let text = token.toString().toLowerCase();
-            let is_drags = false;
+            let text_non_yo = text.replace(/ё/g, 'е');
+            let normalized = morph[0]?(morph.map(x=>x.normalize(false).word)||[text, text_non_yo]):[text, text_non_yo];
+            let is_drugs = false;
             let is_swear = false;
             let is_god = false;
             let is_dangerous_people = false;
             let is_racism = false;
-            if(swear.includes(text.replace(/ё/g, 'е'))) is_swear = true;
-            if(drags.includes(text.replace(/ё/g, 'е'))) is_drags = true;
-            if(gods.includes(text.replace(/ё/g, 'е'))) is_god = true;
-            if(racism.includes(text.replace(/ё/g, 'е'))) is_racism = true;
+            for(let norm of normalized){
+                if(swear.includes(norm) || swear.includes(norm.replace(/ё/g, 'е'))) is_swear = true;
+                if(drugs.includes(norm) || drugs.includes(norm.replace(/ё/g, 'е'))) is_drugs = true;
+                if(gods.includes(norm) || gods.includes(norm.replace(/ё/g, 'е'))) is_god = true;
+                if(racism.includes(norm) || racism.includes(norm.replace(/ё/g, 'е'))) is_racism = true;
+            }
             sentence_morphs.push( {
                 ...token,
                 POST: morph_POST, 
                 text, 
-                normalized: morph[0]?(morph[0].normalize(false).word||text):text,
-                is_drags, 
+                text_non_yo, 
+                normalized,
+                is_drugs, 
                 is_god, 
                 is_swear, 
                 is_dangerous_people, 
@@ -121,12 +130,18 @@ function Analysis(sentence){
 function CheckMorphsForTriggers({sentence_morphs, trigger}){
     let markers_collection = [];
     let triggered = [];
+
+    trigger = {
+        strict_word_direction: false,
+        strict_word_sequence: false,
+        ...trigger
+    }
+
     if(trigger.strict_word_sequence) trigger.strict_word_direction = true;
 
     if(trigger.strict_word_direction){
         let a = trigger.words;
-        let b = sentence_morphs;
-        //...
+        let b = sentence_morphs.filter(x=>x.type=="WORD");
         let m = 0;
         for(let _b of b){
             let _a = a[m];
@@ -148,7 +163,12 @@ function CheckMorphsForTriggers({sentence_morphs, trigger}){
                 }
                 if(key === "normalized"){
                     let values = typeof _a[key] == "string"?[_a[key]]:_a[key];
-                    if(values.includes(_b[key])) valid_keys++;
+                    for(let value of values){
+                        if(_b[key].includes(value)) {
+                            valid_keys++;
+                            break;
+                        }
+                    }
                     continue;
                 }
                 if(_a[key]===_b[key]) valid_keys++;
@@ -166,7 +186,7 @@ function CheckMorphsForTriggers({sentence_morphs, trigger}){
         }
     }else{
         let a = trigger.words;
-        let b = sentence_morphs;
+        let b = sentence_morphs.filter(x=>x.type=="WORD");;
         let m = 0;
         for(let _a of a){
             for(let _b of b){
@@ -181,7 +201,12 @@ function CheckMorphsForTriggers({sentence_morphs, trigger}){
                     }
                     if(key === "normalized"){
                         let values = typeof _a[key] == "string"?[_a[key]]:_a[key];
-                        if(values.includes(_b[key])) valid_keys++;
+                        for(let value of values){
+                            if(_b[key].includes(value)) {
+                                valid_keys++;
+                                break;
+                            }
+                        }
                         continue;
                     }
                     if(_a[key]===_b[key]) valid_keys++;

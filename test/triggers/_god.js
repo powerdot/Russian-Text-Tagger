@@ -21,7 +21,7 @@ module.exports = [
         markers: [3]
     },
     {
-        name: "Отрицание бога 1",
+        name: "Отрицание бога",
         words: [
             {is_god: true},
             {text: ["нет", "нету", "мёртв"]}
@@ -42,5 +42,19 @@ module.exports = [
         strict_word_direction: false,
         check_scope: 'sentences',
         markers: [3]
+    },
+    {
+        name: "Упоминание патриарха",
+        words: [
+            {text: "патриарх"}
+        ],
+        markers: [3,8,1]
+    },
+    {
+        name: "Упоминание патриарха",
+        words: [
+            {text: "патреарх"}
+        ],
+        markers: [3,8,1]
     }
 ]

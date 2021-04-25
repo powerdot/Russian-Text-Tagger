@@ -1,28 +1,22 @@
 
 let common_insults = require("./common_insults")();
 
-let dangerous_people = [
+let governance_people = [
     "путин",
-    "путина",
-    "путину",
-    "путине",
     "путен",
     "кадыров",
     "собянин",
     "собякин",
     "кудрин",
-    "делимханов",
-    "бречалов",
     "мединский",
     "мидинский",
+    "патрушев",
     "набиуллина",
     "нобиуллина",
     "набиулина",
     "нобиулина",
     "улюкаев",
     "силуанов",
-    "патриарх",
-    "патреарх",
     "яровая",
     "матвиенко",
     "песков",
@@ -32,20 +26,22 @@ let dangerous_people = [
     "шайгу",
     "шаигу",
     "шоигу",
-    "патрушев",
+    "сечин",
+    "сетчин",
+    "чемезов",
+    "чемизов",
+];
+
+let rich_people = [
+    "делимханов",
+    "бречалов",
     "греф",
     "миллер",
     "дерипаска",
     "дирипаска",
     "ковальчук",
     "ковальчюк",
-    "ковальчуки",
     "кавальчук",
-    "кавальчуки",
-    "сечин",
-    "сетчин",
-    "чемезов",
-    "чемизов",
     "усманов",
     "вексельберг"
 ];
@@ -59,22 +55,22 @@ module.exports = [
     {
         name: "Необходима проверка на клевету с некоторыми фамилиями",
         words: [
-            {normalized: dangerous_people}
+            {normalized: [...rich_people,...governance_people]},
+            {POST: "VERB"}
         ],
-        strict_word_sequence: false,
-        strict_word_direction: false,
-        check_scope: 'all',
+        strict_word_direction: true,
+        check_scope: 'sentences',
         markers: [8]
     },
     {
         name: "Вероятное оскорбление власти в одном предложении",
         words: [
-            {normalized: dangerous_people},
+            {normalized: governance_people},
             {is_swear: true}
         ],
         strict_word_sequence: false,
         strict_word_direction: true,
         check_scope: 'sentences',
-        markers: [4]
+        markers: [4, 4]
     }
 ]

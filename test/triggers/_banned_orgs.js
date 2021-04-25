@@ -183,6 +183,26 @@ let array = [
         strict_word_sequence: true,
         check_scope: 'all',
         markers: [10]
+    },
+    {
+        name: "Опасная формулировка",
+        words: [
+            {text: "это"},
+            {text: ["бомба", "взрыв"]}
+        ],
+        strict_word_direction: true,
+        check_scope: 'sentences',
+        markers: [14]
+    },
+    {
+        name: "Опасная формулировка",
+        words: [
+            {text: "взрыв"},
+            {text: ["мозга"]}
+        ],
+        strict_word_direction: true,
+        check_scope: 'sentences',
+        markers: [14]
     }
 ];
 

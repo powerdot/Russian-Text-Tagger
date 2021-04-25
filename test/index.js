@@ -5,7 +5,7 @@ const laws = require("./laws");
 
 (async ()=>{
     console.time("Analysis");
-    let results = await Analysis("лала");
+    let results = await Analysis("я убью тебя");
     console.timeEnd("Analysis")
 
     console.log('results:', results);
@@ -64,9 +64,6 @@ const laws = require("./laws");
     console.log(result_numbers);
 })();
 
-
-// Так, а если я рашку предать хочу?
-// бога нет
 
     
 
