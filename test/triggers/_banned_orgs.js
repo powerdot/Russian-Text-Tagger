@@ -203,6 +203,25 @@ let array = [
         strict_word_direction: true,
         check_scope: 'sentences',
         markers: [14]
+    },
+    {
+        name: "Очень опасная формулировка",
+        words: [
+            {text: ["обожаю", "люблю", "лайкаю", "лайкать", "поддерживаю", "пдерживаю"]},
+            {text: ["террор", "терроризм", "террористов", "террориста","терраризм", "терраристов", "террариста", "терор", "тероризм", "терористов", "терориста"]}
+        ],
+        strict_word_direction: true,
+        check_scope: 'sentences',
+        markers: [14, 17, 6]
+    },
+    {
+        name: "Есть солово - взорвем",
+        words: [
+            {text: ["взорву", "взорвем"]}
+        ],
+        strict_word_direction: true,
+        check_scope: 'sentences',
+        markers: [14]
     }
 ];
 

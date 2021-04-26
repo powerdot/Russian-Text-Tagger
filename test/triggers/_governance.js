@@ -3,6 +3,7 @@ let common_insults = require("./common_insults")();
 
 let governance_people = [
     "путин",
+    "путина",
     "путен",
     "кадыров",
     "собянин",
@@ -30,6 +31,8 @@ let governance_people = [
     "сетчин",
     "чемезов",
     "чемизов",
+    "рогозин",
+    "рагозин"
 ];
 
 let rich_people = [

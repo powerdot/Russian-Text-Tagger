@@ -46,15 +46,26 @@ module.exports = [
     {
         name: "Упоминание патриарха",
         words: [
-            {text: "патриарх"}
+            {text: ["патриарх", "патреарх"]}
         ],
         markers: [3,8,1]
     },
     {
-        name: "Упоминание патриарха",
+        name: "Очень опасно",
         words: [
-            {text: "патреарх"}
+            {normalized: ["аллах", "аллаху"]},
+            {text: ['акбар', 'окбар']}
         ],
-        markers: [3,8,1]
+        strict_word_direction: true,
+        check_scope: 'sentences',
+        markers: [3, 17, 14]
+    },
+    {
+        name: "Очень опасно",
+        words: [
+            {text: ['аллахуакбар', 'аллахакбар', 'алахакбар', 'алахуакбар']}
+        ],
+        check_scope: 'sentences',
+        markers: [3, 17, 14]
     }
 ]

@@ -5,7 +5,7 @@ const laws = require("./laws");
 
 (async ()=>{
     console.time("Analysis");
-    let results = await Analysis("я убью тебя");
+    let results = await Analysis("знаешь что, я обожаю терраризм, не знаю как ты");
     console.timeEnd("Analysis")
 
     console.log('results:', results);

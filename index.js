@@ -41,11 +41,11 @@ function Analysis(sentence){
                 sentence_morphs.push(token);
                 continue;
             }
-            let morph = Az.Morph(token.toString());
+            let text = token.toString().toLowerCase().replace(/\d/g, '');
+            let text_non_yo = text.replace(/ё/g, 'е');
+            let morph = Az.Morph(text);
             let morph_POST = "undf";
             if(morph.length != 0) morph_POST = morph[0].tag.POST;
-            let text = token.toString().toLowerCase();
-            let text_non_yo = text.replace(/ё/g, 'е');
             let normalized = morph[0]?(morph.map(x=>x.normalize(false).word)||[text, text_non_yo]):[text, text_non_yo];
             let is_drugs = false;
             let is_swear = false;
@@ -58,7 +58,7 @@ function Analysis(sentence){
                 if(gods.includes(norm) || gods.includes(norm.replace(/ё/g, 'е'))) is_god = true;
                 if(racism.includes(norm) || racism.includes(norm.replace(/ё/g, 'е'))) is_racism = true;
             }
-            sentence_morphs.push( {
+            let _m = {
                 ...token,
                 POST: morph_POST, 
                 text, 
@@ -69,7 +69,8 @@ function Analysis(sentence){
                 is_swear, 
                 is_dangerous_people, 
                 is_racism
-            } );
+            };
+            sentence_morphs.push( _m );
         }
         sentences_morphs.push(sentence_morphs);
     }
@@ -139,10 +140,12 @@ function CheckMorphsForTriggers({sentence_morphs, trigger}){
 
     if(trigger.strict_word_sequence) trigger.strict_word_direction = true;
 
+    let a = trigger.words;
+    let b = sentence_morphs.filter(x=>x.type=="WORD");
+    let m = 0;
+    // let selected_morphs = [];
+
     if(trigger.strict_word_direction){
-        let a = trigger.words;
-        let b = sentence_morphs.filter(x=>x.type=="WORD");
-        let m = 0;
         for(let _b of b){
             let _a = a[m];
             
@@ -175,19 +178,21 @@ function CheckMorphsForTriggers({sentence_morphs, trigger}){
             }
             if(valid_keys == need_valid_keys){
                 m++;
+                // selected_morphs.push(_b);
                 if(m == a.length) break;
             }else{
-                if(trigger.strict_word_sequence) m = 0;
+                if(trigger.strict_word_sequence) {
+                    // selected_morphs = [];
+                    m = 0;
+                }
             }
         }
         if(m == a.length) {
+            // trigger.selected_morphs = selected_morphs;
             markers_collection.push(...trigger.markers)
             triggered.push(trigger);
         }
     }else{
-        let a = trigger.words;
-        let b = sentence_morphs.filter(x=>x.type=="WORD");;
-        let m = 0;
         for(let _a of a){
             for(let _b of b){
                 let keys_to_check = Object.keys(_a);
@@ -217,6 +222,7 @@ function CheckMorphsForTriggers({sentence_morphs, trigger}){
             }
         }
         if(m == a.length) {
+            // trigger.selected_morphs = selected_morphs;
             markers_collection.push(...trigger.markers)
             triggered.push(trigger);
         }

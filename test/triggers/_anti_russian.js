@@ -18,6 +18,16 @@ module.exports = [
         check_scope: 'sentences',
         strict_word_direction: true,
         markers: [8]
+    },
+    {
+        name: "Что значит героям слава?!",
+        words: [
+            {normalized: ["герой"]},
+            {normalized: ["слава"]},
+        ],
+        check_scope: 'sentences',
+        strict_word_sequence: true,
+        markers: [16, 17, 10]
     }
 ]
 
