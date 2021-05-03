@@ -10,6 +10,16 @@ module.exports = [
         markers: [16]
     },
     {
+        name: "Предательство Российской Федерации",
+        words: [
+            {text: ["ненавижу"]},
+            {text: ["рашку", "рф", "россию", "расию", "рассию"]},
+        ],
+        check_scope: 'sentences',
+        strict_word_direction: true,
+        markers: [16]
+    },
+    {
         name: "Закручивание гаек невозможно в демократическом обществе - Клевета!",
         words: [
             {normalized: ["гайка"]},

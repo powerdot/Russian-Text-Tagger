@@ -187,7 +187,7 @@ let array = [
     {
         name: "Опасная формулировка",
         words: [
-            {text: "это"},
+            {text: ["это", "просто"]},
             {text: ["бомба", "взрыв"]}
         ],
         strict_word_direction: true,

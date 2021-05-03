@@ -17,6 +17,14 @@ module.exports = [
         check_scope: 'sentences',
         markers: [6]
     },
+    {
+        name: "Угроза вреда",
+        words: [
+            {normalized: ["убить"]},
+        ],
+        check_scope: 'sentences',
+        markers: [6]
+    },
 ]
 
 // strict_word_sequence: false,

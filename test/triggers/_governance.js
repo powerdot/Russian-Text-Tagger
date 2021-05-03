@@ -74,6 +74,37 @@ module.exports = [
         strict_word_sequence: false,
         strict_word_direction: true,
         check_scope: 'sentences',
-        markers: [4, 4]
+        markers: [4]
+    },
+    {
+        name: "Вероятное оскорбление власти в одном предложении",
+        words: [
+            {normalized: governance_people},
+            {text: ["плохой", "дурак", "чмо", "хуй", "тупой", "идиот", "кретин", "говно", "царь", "предатель"]}
+        ],
+        strict_word_sequence: false,
+        strict_word_direction: true,
+        check_scope: 'sentences',
+        markers: [4]
+    },
+    {
+        name: "Вероятное оскорбление власти - не с заглавной буквы",
+        words: [
+            {normalized: governance_people, firstUpper: false},
+        ],
+        strict_word_sequence: false,
+        strict_word_direction: true,
+        check_scope: 'sentences',
+        markers: [4]
+    },
+    {
+        name: "Вероятное оскорбление власти - не с заглавной буквы",
+        words: [
+            {text: ['путен', 'путэн', 'собякин', 'хутин']},
+        ],
+        strict_word_sequence: false,
+        strict_word_direction: true,
+        check_scope: 'sentences',
+        markers: [4]
     }
 ]

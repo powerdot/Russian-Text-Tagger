@@ -24,10 +24,21 @@ module.exports = [
         name: "Отрицание бога",
         words: [
             {is_god: true},
-            {text: ["нет", "нету", "мёртв"]}
+            {text: ["нет", "нету", "мёртв", "ненавижу", "ненавидим"]}
         ],
         strict_word_sequence: true,
         strict_word_direction: false,
+        check_scope: 'sentences',
+        markers: [3]
+    },
+    {
+        name: "Отрицание бога",
+        words: [
+            {text: ["ненавижу", "ненавидим"]},
+            {is_god: true},
+        ],
+        strict_word_sequence: false,
+        strict_word_direction: true,
         check_scope: 'sentences',
         markers: [3]
     },
@@ -39,6 +50,16 @@ module.exports = [
             {text: ["существует", "настоящий"]}
         ],
         strict_word_sequence: true,
+        strict_word_direction: false,
+        check_scope: 'sentences',
+        markers: [3]
+    },
+    {
+        name: "Отрицание бога",
+        words: [
+            {normalized: ["антихрист", "сатана", "дьявол"]}
+        ],
+        strict_word_sequence: false,
         strict_word_direction: false,
         check_scope: 'sentences',
         markers: [3]
