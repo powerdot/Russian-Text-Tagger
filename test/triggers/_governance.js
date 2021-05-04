@@ -96,7 +96,7 @@ module.exports = [
         strict_word_sequence: false,
         strict_word_direction: true,
         check_scope: 'sentences',
-        markers: [4]
+        markers: [4, 8]
     },
     {
         name: "Вероятное оскорбление власти - не с заглавной буквы",
