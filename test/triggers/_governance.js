@@ -80,7 +80,18 @@ module.exports = [
         name: "Вероятное оскорбление власти в одном предложении",
         words: [
             {normalized: governance_people},
-            {text: ["плохой", "дурак", "чмо", "хуй", "тупой", "идиот", "кретин", "говно", "царь", "предатель"]}
+            {text: ["плохой", "дурак", "чмо", "хуй", "тупой", "идиот", "кретин", "говно", "царь"]}
+        ],
+        strict_word_sequence: false,
+        strict_word_direction: true,
+        check_scope: 'sentences',
+        markers: [4]
+    },
+    {
+        name: "Вероятное оскорбление и клевета",
+        words: [
+            {normalized: [...rich_people,...governance_people]},
+            {text: ["предатель", "вор", "воришка", "обокрал"]}
         ],
         strict_word_sequence: false,
         strict_word_direction: true,
