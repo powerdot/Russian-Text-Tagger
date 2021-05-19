@@ -20,7 +20,7 @@ let triggers = [
     {
         name: "Вопрос о времени",
         words: [
-            {normalized: ["сколько", 'который']},
+            {normalized: ["сколько", 'который', 'какой']},
             {normalized: ["время", "час"]}
         ],
         markers: ['what_time'],
