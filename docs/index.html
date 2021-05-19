@@ -1,99 +1,211 @@
-<script src="./az.min.js"></script>
-<script src="./RTT/index.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@json-editor/json-editor@latest/dist/jsoneditor.min.js"></script>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
-
-<div class="container">
-    <div class="row">
-        <div class="col">
-            <div class="accordion" id="accordionExample">
-                <div class="accordion-item">
-                  <h2 class="accordion-header" id="headingOne">
-                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                      Демка
-                    </button>
-                  </h2>
-                  <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                    <div class="accordion-body">
-                      <textarea id='inputText'>привет! в какое время вы работаете?</textarea>
-                      <button id="GoRTTButton" disabled>Посмотреть</button>
-                      <div id="markers"></div>
-                    </div>
-                  </div>
-                </div>
-                <div class="accordion-item">
-                  <h2 class="accordion-header" id="headingTwo">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                      JSON триггеров
-                    </button>
-                  </h2>
-                  <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-                    <div class="accordion-body">
-                        <div id="jsonEditorHolder"></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-        </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RTT Demo!</title>
+  <script src="./az.min.js"></script>
+  <script src="./RTT/index.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@json-editor/json-editor@latest/dist/jsoneditor.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <div class="container">
+    <div class="row mt-5">
+      <div class="col text-center">
+        <h1>Демо работы тэггера</h1>
+      </div>
     </div>
-</div>
+    <div class="row mt-5" >
+      <div class="col">
+        <div class="chat_window">
+          <div class="top_menu">
+              <div class="buttons">
+                  <div class="button close"></div>
+                  <div class="button minimize"></div>
+                  <div class="button maximize"></div>
+              </div>
+              <div class="title">Якобы ассистент</div>
+          </div>
+          <ul class="messages"></ul>
+          <div class="bottom_wrapper clearfix">
+              <div class="message_input_wrapper">
+                  <input class="message_input" placeholder="Твоё сообщение..." />
+              </div>
+              <div class="send_message">
+                  <div class="icon"></div>
+                  <div class="text">Отправить</div>
+              </div>
+          </div>
+        </div>
+        <div class="message_template">
+          <li class="message">
+              <div class="avatar"></div>
+              <div class="text_wrapper">
+                  <div class="text"></div>
+              </div>
+          </li>
+        </div>
+      </div>
+    </div>
 
+    <div class="row mt-5">
+      <div class="col text-center">
+        <h2>Спросить что?</h2>
+      </div>
+    </div>
+    <div class="row mt-4">
+      <div class="col asks text-center">
+        <div class='ask'>Привет</div>
+        <div class='ask'>Который час?</div>
+        <div class='ask'>Привет! Включи свет!</div>
+        <div class='ask'>В какое время ты работаешь?</div>
+        <div class='ask'>Останови трек</div>
+        <div class='ask'>хай</div>
+        <div class="ask">прив включи лампочку</div>
+        <div class="ask">Включи светильник и выключи трек</div>
+        <div class='ask'>Привет! Включи, пожалуйста, будть так уж добр, музыку... и выключи свет!</div>
+      </div>
+    </div>
 
+    <div class="row mt-5">
+      <div class="col text-center">
+        <h2>Как оно работает?</h2>
+      </div>
+    </div>
+    <div class="row mt-4">
+      <div class="col text-center">
+        <blockquote class="blockquote">
+          Эта штука просто триггерится на слова или их последовательности.
+          <br>
+          Например, нужно вызвать <i>триггер включения света</i>, если в предложении есть слова <b>включить</b> и <b>свет</b>.
+        </blockquote>
+      </div>
+    </div>
+    <div class="row mt-2">
+      <div class="col-2"></div>
+      <div class="col-8">
+        <br>
+        Триггер будет выглядеть так:
+        <script src="https://gist.github.com/powerdot/2f7d1c930a7b2130f9d04076c852697f.js"></script>
+      </div>
+      <div class="col-2"></div>
+    </div>
+    <div class="row mt-5">
+      <div class="col text-center">
+        <blockquote class="blockquote">
+          Но иногда бывают ситуации, что человек может написать не <b>включить</b>, а <b>включи</b> или <b>включай</b>.
+          <br>
+          В этом случае можно использовать <i>нормализированное</i> слово - поиск по начальной форме.
+        </blockquote>
+      </div>
+    </div>
+    <div class="row mt-2">
+      <div class="col-2"></div>
+      <div class="col-8">
+        <script src="https://gist.github.com/powerdot/d31582b8fd48086a67841178a792409d.js"></script>
+      </div>
+      <div class="col-2"></div>
+    </div>
+    <div class="row mt-5">
+      <div class="col text-center">
+        <blockquote class="blockquote">
+          Но и не только один вариант в качестве "<b>свет</b>" может быть.
+          <br>
+          Ещё могут быть <b>лампа</b> и <b>светильник</b>. - Их можно указать <i>в массиве</i>.
+        </blockquote>
+      </div>
+    </div>
+    <div class="row mt-2">
+      <div class="col-2"></div>
+      <div class="col-8">
+        <script src="https://gist.github.com/powerdot/1dff4515c7f3f271b3d6d4e21a04a9ff.js"></script>
+      </div>
+      <div class="col-2"></div>
+    </div>
+    <div class="row mt-5">
+      <div class="col text-center">
+        <blockquote class="blockquote">
+          Вот расширенный вариант с музыкой. Он тригернится на:
+          <br>
+          <b>включи песню</b>, <b>запусти трек</b> и на <b>возобнови пожалуйса музыку</b>.
+        </blockquote>
+      </div>
+    </div>
+    <div class="row mt-2">
+      <div class="col-2"></div>
+      <div class="col-8">
+        <script src="https://gist.github.com/powerdot/94744ebf0bce9b1ed83f92750c1baf09.js"></script>
+      </div>
+      <div class="col-2"></div>
+    </div>
+    <div class="row mt-5">
+      <div class="col text-center">
+        <blockquote class="blockquote">
+          А вот массив триггеров в этом <i>якобы ассистенте</i> выше!
+        </blockquote>
+      </div>
+    </div>
+    <div class="row mt-2">
+      <div class="col-2"></div>
+      <div class="col-8">
+        <script src="https://gist.github.com/powerdot/e5ab5ccd74615e367effb748d62c2fcd.js"></script>
+      </div>
+      <div class="col-2"></div>
+    </div>
 
-
-<script>
-    let triggers = [
-        {
-            name: "Приветсвие",
-            words: [{text: ["привет", "хелоу", "здарова", "хай", "прив"]}],
-            markers: [1],
-            check_scope: 'sentences'
-        },
-        {
-            name: "Вопрос о времени работы",
-            words: [
-                {normalized: ["какой"]},
-                {normalized: ["время", "час", "часы"]},
-                {normalized: ["работать"]},
-            ],
-            markers: [2],
-            check_scope: 'sentences'
-        },
-    ];
-</script>
-
-
-
-<script>
-    let RTT;
-    window.onload = function() {
-        const element = document.getElementById('jsonEditorHolder');
-        const editor = new JSONEditor(element, {
-            schema: {},
-            theme: 'bootstrap4'
-        });
-        editor.setValue(triggers);
-        console.log("Window Loaded")
-    };
-
-    Az.Morph.init('./dicts', function(){
-        console.log('AZ Loaded')
-        RTT = RussianTextTagger({triggers, loadedAz: Az, uniq_markers: true});
-        GoRTTButton.disabled = false;
-        GoRTT()
-    })
-
-    GoRTTButton.onclick = GoRTT;
-
-    function GoRTT(){
-        let result = RTT(inputText.value);
-        console.log("RTT Result:", result);
-        markers.innerHTML = "";
-        for(let marker of result.markers){
-            markers.innerText += marker+",";
-        }
-    }
-
-    
-</script>
+    <div class="row mt-5">
+      <div class="col text-center">
+        <h2>Как воспользоваться?</h2>
+      </div>
+    </div>
+    <div class="row mt-4">
+      <div class="col text-center">
+        <blockquote class="blockquote">
+          Она работает как на <i>беке</i>, так <i>фронте</i>!
+        </blockquote>
+      </div>
+    </div>
+    <div class="row mt-4">
+      <div class="col text-center">
+        <b>Установи завимости в проект:</b>
+        <pre>npm i @powerdot/russian-text-tagger</pre>
+      </div>
+    </div>
+    <div class="row mt-2">
+      <div class="col-2"></div>
+      <div class="col-8 text-center">
+        <b>Используй!</b>
+        <script src="https://gist.github.com/powerdot/2bb02fcde82134716ea474b935b81333.js"></script>
+      </div>
+      <div class="col-2"></div>
+    </div>
+    <div class="row mt-3">
+      <div class="col text-center">
+        <b>... или ...</b>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="col-2"></div>
+      <div class="col-8 text-center">
+        <b>Прямо вот так!</b>
+        <script src="https://gist.github.com/powerdot/d61493cea5d30ac5edfb8dd0a0d31919.js"></script>
+      </div>
+      <div class="col-2"></div>
+    </div>
+  </div>
+  <footer class='mt-5'>
+    <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
+      <a class="text-reset" target="_blank" href="https://github.com/powerdot">@powerdot's GitHub</a> | 
+      <a class="text-reset" target="_blank" href="https://www.bootdey.com/snippets/view/animated-chat-window#html">Chat Example — Bootdey</a> | 
+      <a class="text-reset" target="_blank" href="https://github.com/deNULL/Az.js">Az.js</a>
+    </div>
+  </footer>
+</body>
+</html>
+<script src='./analyser.js'></script>
+<script src='./chat.js'></script>
