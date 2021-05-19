@@ -6,6 +6,7 @@ let governance_people = [
     "путина",
     "путен",
     "кадыров",
+    "кодыров",
     "собянин",
     "собякин",
     "кудрин",
@@ -117,5 +118,17 @@ module.exports = [
         strict_word_direction: true,
         check_scope: 'sentences',
         markers: [4]
-    }
+    },
+
+    {
+        name: "Вероятное оскорбление власти в одном предложении",
+        words: [
+            {normalized: governance_people},
+            {text: ["убийца", "террорист", "терорист"]}
+        ],
+        strict_word_sequence: false,
+        strict_word_direction: true,
+        check_scope: 'sentences',
+        markers: [4, 8]
+    },
 ]
