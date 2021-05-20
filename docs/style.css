@@ -144,8 +144,9 @@
     position: relative;
     width: 100%;
     background-color: #fff;
-    padding: 20px 20px;
+    padding: 10px 20px;
     position: absolute;
+    padding-bottom: 3px;
     bottom: 0;
   }
   .bottom_wrapper .message_input_wrapper {
@@ -153,7 +154,7 @@
     height: 50px;
     border-radius: 25px;
     border: 1px solid #bcbdc0;
-    width: calc(100% - 160px);
+    width: calc(100% - 80px);
     position: relative;
     padding: 0 20px;
   }
@@ -167,7 +168,7 @@
     color: gray;
   }
   .bottom_wrapper .send_message {
-    width: 140px;
+    width: 70px;
     height: 50px;
     display: inline-block;
     border-radius: 50px;
@@ -187,7 +188,7 @@
     font-size: 18px;
     font-weight: 300;
     display: inline-block;
-    line-height: 48px;
+    line-height: 43px;
   }
   
   .message_template {
