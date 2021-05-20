@@ -31,6 +31,7 @@ if (e.which === 13) {
 }
 });
 
+
 sendMessage = function (text, message_side='left') {
 var $messages, message;
 if (text.trim() === '') return;
