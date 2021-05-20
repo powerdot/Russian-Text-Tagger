@@ -242,6 +242,12 @@ let results = await Analysis("Как-то в зоопарке петух ска�
 ```
 
 ### NodeJS
+Устанавливаем зависимость в проект
+```bash
+npm i @powerdot/russian-text-tagger
+```
+
+Юзаем!
 ``` javascript
 let Analysis = require("russian-text-tagger")({triggers});
 
